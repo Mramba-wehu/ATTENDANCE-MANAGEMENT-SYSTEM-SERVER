@@ -23,7 +23,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origins: [
+  "http://localhost:5173", "https://attendance-management-system-client.onrender.com"
+], 
+credentials: true }));
 app.use("/api/notes/pdf", express.static(path.join(__dirname, "assets/notes/pdf")));
 app.use("/api/plea-src", express.static(path.join(__dirname, "assets/plea")));
 app.use(morgan("dev"));
@@ -60,4 +63,5 @@ connectDB().then(async () => {
     console.error("❌ Initialization failed:", err);
     process.exit(1);
   }
+
 });
